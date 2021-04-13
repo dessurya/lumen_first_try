@@ -36,7 +36,7 @@ $router->group(['prefix' => 'react-request'], function() use ($router) {
                 'gander'=>'male',
             ],
             'token' => 'blablabla-dracula',
-        ]);
+        ], 201);
     });
 });
 
