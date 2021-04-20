@@ -51,6 +51,8 @@ $router->group(['prefix' => 'try'], function() use ($router) {
     $router->post('/', 'TryController@index');
 
     $router->group(['middleware' => 'auth:api'], function() use ($router) {
+        $router->post('/res_success', 'TryController@success');
+        $router->post('/res_fail', 'TryController@fail');
         $router->post('/coba', 'TryController@try');
     });
 });
