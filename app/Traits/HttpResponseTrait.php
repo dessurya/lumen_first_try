@@ -2,14 +2,17 @@
 
 namespace App\Traits;
 
+use App\Helpers\OpenSslHelper AS OpenSsl;
+
 trait HttpResponseTrait
 {
     public function resSuccess(string $msg = 'Success', array $data = [], int $resCode = 200)
     {
         $ret = [
             'success' => true,
-            'msg' => $msg,
-            'data' => $data
+            'msg' => OpenSsl::encrypt($msg),
+            'data' => OpenSsl::encrypt(json_encode($data))
+            // 'data' => $data
         ];
         return response()->json($ret, $resCode);
     }
@@ -18,7 +21,7 @@ trait HttpResponseTrait
     {
         $ret = [
             'success' => false,
-            'msg' => $msg
+            'msg' => OpenSsl::encrypt($msg)
         ];
         return response()->json($ret, $resCode);
     }
